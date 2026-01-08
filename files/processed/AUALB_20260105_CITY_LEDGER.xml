@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<city_ledger hotel_code="AUALB" date="2026-01-05">
+  <transaction trx_code="9002" transaction_type="INVOICE">
+    <bill_no>154</bill_no>
+    <invoice_no>90</invoice_no>
+    <amount>30.00</amount>
+    <account_info customer_internal_id="20617">
+      <account_name>IHG POINTS</account_name>
+      <account_number>1352000285</account_number>
+    </account_info>
+    <reservation_info>
+      <confirmation_no>20052</confirmation_no>
+      <arrival_date>2026-01-04</arrival_date>
+      <departure_date>2026-01-05</departure_date>
+      <guest_name>Cassidy, Gary</guest_name>
+    </reservation_info>
+  </transaction>
+  <transaction trx_code="9002" transaction_type="INVOICE">
+    <bill_no>176</bill_no>
+    <invoice_no>91</invoice_no>
+    <amount>82.00</amount>
+    <account_info customer_internal_id="20617">
+      <account_name>IHG POINTS</account_name>
+      <account_number>1352000285</account_number>
+    </account_info>
+    <reservation_info>
+      <confirmation_no>19791</confirmation_no>
+      <arrival_date>2026-01-03</arrival_date>
+      <departure_date>2026-01-05</departure_date>
+      <guest_name>Perry Iii, Michael</guest_name>
+    </reservation_info>
+  </transaction>
+  <transaction trx_code="9005" transaction_type="CC_TRANSFER">
+    <bill_no>172</bill_no>
+    <amount>835.76</amount>
+    <credit_card_last_4_digits>XXXX</credit_card_last_4_digits>
+    <account_info/>
+    <reservation_info>
+      <confirmation_no>19538</confirmation_no>
+      <arrival_date>2026-01-03</arrival_date>
+      <departure_date>2026-01-05</departure_date>
+      <guest_name>TJON A MEEUW, JOHN ALEXIS</guest_name>
+    </reservation_info>
+  </transaction>
+  <transaction trx_code="9005" transaction_type="CC_TRANSFER">
+    <bill_no>170</bill_no>
+    <amount>-1742.14</amount>
+    <credit_card_last_4_digits>XXXX</credit_card_last_4_digits>
+    <account_info/>
+    <reservation_info>
+      <confirmation_no>19537</confirmation_no>
+      <arrival_date>2026-01-03</arrival_date>
+      <departure_date>2026-01-05</departure_date>
+      <guest_name>TJON A MEEUW, JOHN ALEXIS</guest_name>
+    </reservation_info>
+  </transaction>
+  <transaction trx_code="9005" transaction_type="CC_TRANSFER">
+    <bill_no>169</bill_no>
+    <amount>899.52</amount>
+    <credit_card_last_4_digits>XXXX</credit_card_last_4_digits>
+    <account_info/>
+    <reservation_info>
+      <confirmation_no>19537</confirmation_no>
+      <arrival_date>2026-01-03</arrival_date>
+      <departure_date>2026-01-05</departure_date>
+      <guest_name>TJON A MEEUW, JOHN ALEXIS</guest_name>
+    </reservation_info>
+  </transaction>
+  <transaction trx_code="9003" transaction_type="CC_TRANSFER">
+    <bill_no>161</bill_no>
+    <amount>1881.52</amount>
+    <credit_card_last_4_digits>XXXX</credit_card_last_4_digits>
+    <account_info/>
+    <reservation_info>
+      <confirmation_no>19799</confirmation_no>
+      <arrival_date>2026-01-03</arrival_date>
+      <departure_date>2026-01-05</departure_date>
+      <guest_name>Guzman-Urbano, Mateo</guest_name>
+    </reservation_info>
+  </transaction>
+  <transaction trx_code="9003" transaction_type="CC_TRANSFER">
+    <bill_no>161</bill_no>
+    <amount>1881.52</amount>
+    <credit_card_last_4_digits>XXXX</credit_card_last_4_digits>
+    <account_info/>
+    <reservation_info>
+      <confirmation_no>19799</confirmation_no>
+      <arrival_date>2026-01-03</arrival_date>
+      <departure_date>2026-01-05</departure_date>
+      <guest_name>Guzman-Urbano, Mateo</guest_name>
+    </reservation_info>
+  </transaction>
+  <transaction trx_code="9003" transaction_type="CC_TRANSFER">
+    <bill_no>161</bill_no>
+    <amount>1881.52</amount>
+    <credit_card_last_4_digits>XXXX</credit_card_last_4_digits>
+    <account_info/>
+    <reservation_info>
+      <confirmation_no>19799</confirmation_no>
+      <arrival_date>2026-01-03</arrival_date>
+      <departure_date>2026-01-05</departure_date>
+      <guest_name>Guzman-Urbano, Mateo</guest_name>
+    </reservation_info>
+  </transaction>
+  <transaction trx_code="9003" transaction_type="CC_TRANSFER">
+    <bill_no>161</bill_no>
+    <amount>1881.52</amount>
+    <credit_card_last_4_digits>XXXX</credit_card_last_4_digits>
+    <account_info/>
+    <reservation_info>
+      <confirmation_no>19799</confirmation_no>
+      <arrival_date>2026-01-03</arrival_date>
+      <departure_date>2026-01-05</departure_date>
+      <guest_name>Guzman-Urbano, Mateo</guest_name>
+    </reservation_info>
+  </transaction>
+  <transaction trx_code="9003" transaction_type="CC_TRANSFER">
+    <bill_no>161</bill_no>
+    <amount>-1881.52</amount>
+    <credit_card_last_4_digits>XXXX</credit_card_last_4_digits>
+    <account_info/>
+    <reservation_info>
+      <confirmation_no>19799</confirmation_no>
+      <arrival_date>2026-01-03</arrival_date>
+      <departure_date>2026-01-05</departure_date>
+      <guest_name>Guzman-Urbano, Mateo</guest_name>
+    </reservation_info>
+  </transaction>
+  <transaction trx_code="9003" transaction_type="CC_TRANSFER">
+    <bill_no>161</bill_no>
+    <amount>-1881.52</amount>
+    <credit_card_last_4_digits>XXXX</credit_card_last_4_digits>
+    <account_info/>
+    <reservation_info>
+      <confirmation_no>19799</confirmation_no>
+      <arrival_date>2026-01-03</arrival_date>
+      <departure_date>2026-01-05</departure_date>
+      <guest_name>Guzman-Urbano, Mateo</guest_name>
+    </reservation_info>
+  </transaction>
+  <transaction trx_code="9003" transaction_type="CC_TRANSFER">
+    <bill_no>161</bill_no>
+    <amount>-1881.52</amount>
+    <credit_card_last_4_digits>XXXX</credit_card_last_4_digits>
+    <account_info/>
+    <reservation_info>
+      <confirmation_no>19799</confirmation_no>
+      <arrival_date>2026-01-03</arrival_date>
+      <departure_date>2026-01-05</departure_date>
+      <guest_name>Guzman-Urbano, Mateo</guest_name>
+    </reservation_info>
+  </transaction>
+  <transaction trx_code="9003" transaction_type="CC_TRANSFER">
+    <bill_no>161</bill_no>
+    <amount>-1881.52</amount>
+    <credit_card_last_4_digits>XXXX</credit_card_last_4_digits>
+    <account_info/>
+    <reservation_info>
+      <confirmation_no>19799</confirmation_no>
+      <arrival_date>2026-01-03</arrival_date>
+      <departure_date>2026-01-05</departure_date>
+      <guest_name>Guzman-Urbano, Mateo</guest_name>
+    </reservation_info>
+  </transaction>
+  <transaction trx_code="9005" transaction_type="CC_TRANSFER">
+    <bill_no>162</bill_no>
+    <amount>-1881.52</amount>
+    <credit_card_last_4_digits>XXXX</credit_card_last_4_digits>
+    <account_info/>
+    <reservation_info>
+      <confirmation_no>19799</confirmation_no>
+      <arrival_date>2026-01-03</arrival_date>
+      <departure_date>2026-01-05</departure_date>
+      <guest_name>Guzman-Urbano, Mateo</guest_name>
+    </reservation_info>
+  </transaction>
+  <transaction trx_code="9004" transaction_type="CC_TRANSFER">
+    <bill_no>158</bill_no>
+    <amount>62.50</amount>
+    <credit_card_last_4_digits>XXXX</credit_card_last_4_digits>
+    <account_info/>
+    <reservation_info>
+      <confirmation_no>19809</confirmation_no>
+      <arrival_date>2026-01-04</arrival_date>
+      <departure_date>2026-01-05</departure_date>
+      <guest_name>Eshalomi, Krystopherous</guest_name>
+    </reservation_info>
+  </transaction>
+  <transaction trx_code="9003" transaction_type="CC_TRANSFER">
+    <bill_no>160</bill_no>
+    <amount>940.76</amount>
+    <credit_card_last_4_digits>XXXX</credit_card_last_4_digits>
+    <account_info/>
+    <reservation_info>
+      <confirmation_no>19799</confirmation_no>
+      <arrival_date>2026-01-03</arrival_date>
+      <departure_date>2026-01-05</departure_date>
+      <guest_name>Guzman-Urbano, Mateo</guest_name>
+    </reservation_info>
+  </transaction>
+  <transaction trx_code="9005" transaction_type="CC_TRANSFER">
+    <bill_no>165</bill_no>
+    <amount>9.78</amount>
+    <credit_card_last_4_digits>XXXX</credit_card_last_4_digits>
+    <account_info/>
+    <reservation_info>
+      <confirmation_no>19798</confirmation_no>
+      <arrival_date>2026-01-03</arrival_date>
+      <departure_date>2026-01-05</departure_date>
+      <guest_name>Guzman-Urbano, Mateo</guest_name>
+    </reservation_info>
+  </transaction>
+  <transaction trx_code="9005" transaction_type="CC_TRANSFER">
+    <bill_no>164</bill_no>
+    <amount>1881.52</amount>
+    <credit_card_last_4_digits>XXXX</credit_card_last_4_digits>
+    <account_info/>
+    <reservation_info>
+      <confirmation_no>19798</confirmation_no>
+      <arrival_date>2026-01-03</arrival_date>
+      <departure_date>2026-01-05</departure_date>
+      <guest_name>Guzman-Urbano, Mateo</guest_name>
+    </reservation_info>
+  </transaction>
+  <transaction trx_code="9005" transaction_type="CC_TRANSFER">
+    <bill_no>164</bill_no>
+    <amount>-3763.04</amount>
+    <credit_card_last_4_digits>XXXX</credit_card_last_4_digits>
+    <account_info/>
+    <reservation_info>
+      <confirmation_no>19798</confirmation_no>
+      <arrival_date>2026-01-03</arrival_date>
+      <departure_date>2026-01-05</departure_date>
+      <guest_name>Guzman-Urbano, Mateo</guest_name>
+    </reservation_info>
+  </transaction>
+  <transaction trx_code="9005" transaction_type="CC_TRANSFER">
+    <bill_no>163</bill_no>
+    <amount>940.76</amount>
+    <credit_card_last_4_digits>XXXX</credit_card_last_4_digits>
+    <account_info/>
+    <reservation_info>
+      <confirmation_no>19798</confirmation_no>
+      <arrival_date>2026-01-03</arrival_date>
+      <departure_date>2026-01-05</departure_date>
+      <guest_name>Guzman-Urbano, Mateo</guest_name>
+    </reservation_info>
+  </transaction>
+  <transaction trx_code="9003" transaction_type="CC_TRANSFER">
+    <bill_no>166</bill_no>
+    <amount>22.00</amount>
+    <credit_card_last_4_digits>XXXX</credit_card_last_4_digits>
+    <account_info/>
+    <reservation_info>
+      <confirmation_no>20038</confirmation_no>
+      <arrival_date>2026-01-04</arrival_date>
+      <departure_date>2026-01-05</departure_date>
+      <guest_name>Dingler, Lawrence</guest_name>
+    </reservation_info>
+  </transaction>
+  <transaction trx_code="9005" transaction_type="CC_TRANSFER">
+    <bill_no>171</bill_no>
+    <amount>97.75</amount>
+    <credit_card_last_4_digits>XXXX</credit_card_last_4_digits>
+    <account_info/>
+    <reservation_info>
+      <confirmation_no>19538</confirmation_no>
+      <arrival_date>2026-01-03</arrival_date>
+      <departure_date>2026-01-05</departure_date>
+      <guest_name>TJON A MEEUW, JOHN ALEXIS</guest_name>
+    </reservation_info>
+  </transaction>
+  <transaction trx_code="9005" transaction_type="CC_TRANSFER">
+    <bill_no>168</bill_no>
+    <amount>210.42</amount>
+    <credit_card_last_4_digits>XXXX</credit_card_last_4_digits>
+    <account_info/>
+    <reservation_info>
+      <confirmation_no>19537</confirmation_no>
+      <arrival_date>2026-01-03</arrival_date>
+      <departure_date>2026-01-05</departure_date>
+      <guest_name>TJON A MEEUW, JOHN ALEXIS</guest_name>
+    </reservation_info>
+  </transaction>
+  <transaction trx_code="9003" transaction_type="CC_TRANSFER">
+    <bill_no>182</bill_no>
+    <amount>156.60</amount>
+    <credit_card_last_4_digits>XXXX</credit_card_last_4_digits>
+    <account_info/>
+    <reservation_info>
+      <confirmation_no>16536</confirmation_no>
+      <arrival_date>2026-01-01</arrival_date>
+      <departure_date>2026-01-05</departure_date>
+      <guest_name>Cordova, Giovanna</guest_name>
+    </reservation_info>
+  </transaction>
+  <transaction trx_code="9004" transaction_type="CC_TRANSFER">
+    <amount>442.26</amount>
+    <credit_card_last_4_digits>XXXX</credit_card_last_4_digits>
+    <account_info/>
+    <reservation_info>
+      <confirmation_no>20049</confirmation_no>
+      <arrival_date>2026-01-05</arrival_date>
+      <departure_date>2026-01-06</departure_date>
+      <guest_name>Zoodsma, Tom</guest_name>
+    </reservation_info>
+  </transaction>
+  <transaction trx_code="9004" transaction_type="CC_TRANSFER">
+    <amount>442.00</amount>
+    <credit_card_last_4_digits>XXXX</credit_card_last_4_digits>
+    <account_info/>
+    <reservation_info>
+      <confirmation_no>20047</confirmation_no>
+      <arrival_date>2026-01-05</arrival_date>
+      <departure_date>2026-01-06</departure_date>
+      <guest_name>Zoodsma, Tom</guest_name>
+    </reservation_info>
+  </transaction>
+  <transaction trx_code="9004" transaction_type="CC_TRANSFER">
+    <amount>442.26</amount>
+    <credit_card_last_4_digits>XXXX</credit_card_last_4_digits>
+    <account_info/>
+    <reservation_info>
+      <confirmation_no>20048</confirmation_no>
+      <arrival_date>2026-01-05</arrival_date>
+      <departure_date>2026-01-06</departure_date>
+      <guest_name>Zoodsma, Tom</guest_name>
+    </reservation_info>
+  </transaction>
+  <transaction trx_code="9004" transaction_type="CC_TRANSFER">
+    <amount>0.26</amount>
+    <credit_card_last_4_digits>XXXX</credit_card_last_4_digits>
+    <account_info/>
+    <reservation_info>
+      <confirmation_no>20047</confirmation_no>
+      <arrival_date>2026-01-05</arrival_date>
+      <departure_date>2026-01-06</departure_date>
+      <guest_name>Zoodsma, Tom</guest_name>
+    </reservation_info>
+  </transaction>
+  <transaction trx_code="9004" transaction_type="CC_TRANSFER">
+    <amount>23.10</amount>
+    <credit_card_last_4_digits>XXXX</credit_card_last_4_digits>
+    <account_info/>
+    <reservation_info>
+      <confirmation_no>20048</confirmation_no>
+      <arrival_date>2026-01-05</arrival_date>
+      <departure_date>2026-01-06</departure_date>
+      <guest_name>Zoodsma, Tom</guest_name>
+    </reservation_info>
+  </transaction>
+  <transaction trx_code="9004" transaction_type="CC_TRANSFER">
+    <amount>82.30</amount>
+    <credit_card_last_4_digits>XXXX</credit_card_last_4_digits>
+    <account_info/>
+    <reservation_info>
+      <confirmation_no>20048</confirmation_no>
+      <arrival_date>2026-01-05</arrival_date>
+      <departure_date>2026-01-06</departure_date>
+      <guest_name>Zoodsma, Tom</guest_name>
+    </reservation_info>
+  </transaction>
+  <transaction trx_code="9004" transaction_type="CC_TRANSFER">
+    <amount>-23.10</amount>
+    <credit_card_last_4_digits>XXXX</credit_card_last_4_digits>
+    <account_info/>
+    <reservation_info>
+      <confirmation_no>20048</confirmation_no>
+      <arrival_date>2026-01-05</arrival_date>
+      <departure_date>2026-01-06</departure_date>
+      <guest_name>Zoodsma, Tom</guest_name>
+    </reservation_info>
+  </transaction>
+  <transaction trx_code="9004" transaction_type="CC_TRANSFER">
+    <amount>82.30</amount>
+    <credit_card_last_4_digits>XXXX</credit_card_last_4_digits>
+    <account_info/>
+    <reservation_info>
+      <confirmation_no>20049</confirmation_no>
+      <arrival_date>2026-01-05</arrival_date>
+      <departure_date>2026-01-06</departure_date>
+      <guest_name>Zoodsma, Tom</guest_name>
+    </reservation_info>
+  </transaction>
+  <transaction trx_code="9004" transaction_type="CC_TRANSFER">
+    <amount>82.30</amount>
+    <credit_card_last_4_digits>XXXX</credit_card_last_4_digits>
+    <account_info/>
+    <reservation_info>
+      <confirmation_no>20047</confirmation_no>
+      <arrival_date>2026-01-05</arrival_date>
+      <departure_date>2026-01-06</departure_date>
+      <guest_name>Zoodsma, Tom</guest_name>
+    </reservation_info>
+  </transaction>
+  <transaction trx_code="9005" transaction_type="CC_TRANSFER">
+    <amount>10.64</amount>
+    <credit_card_last_4_digits>XXXX</credit_card_last_4_digits>
+    <account_info/>
+    <reservation_info>
+      <confirmation_no>19038</confirmation_no>
+      <arrival_date>2025-12-31</arrival_date>
+      <departure_date>2026-01-06</departure_date>
+      <guest_name>Fuentes, Ruby Lorena</guest_name>
+    </reservation_info>
+  </transaction>
+  <transaction trx_code="9004" transaction_type="CC_TRANSFER">
+    <amount>2258.68</amount>
+    <credit_card_last_4_digits>XXXX</credit_card_last_4_digits>
+    <account_info/>
+    <reservation_info>
+      <confirmation_no>17331</confirmation_no>
+      <arrival_date>2026-01-05</arrival_date>
+      <departure_date>2026-01-10</departure_date>
+      <guest_name>Isaza, Katherine</guest_name>
+    </reservation_info>
+  </transaction>
+  <transaction trx_code="9304" transaction_type="CC_TRANSFER">
+    <amount>28.75</amount>
+    <account_info/>
+    <reservation_info>
+      <confirmation_no>15536</confirmation_no>
+      <arrival_date>2025-12-18</arrival_date>
+      <departure_date>2026-01-31</departure_date>
+      <guest_name>POS VISA, 9511</guest_name>
+    </reservation_info>
+  </transaction>
+  <transaction trx_code="9305" transaction_type="CC_TRANSFER">
+    <amount>61.60</amount>
+    <account_info/>
+    <reservation_info>
+      <confirmation_no>15538</confirmation_no>
+      <arrival_date>2025-12-18</arrival_date>
+      <departure_date>2026-01-31</departure_date>
+      <guest_name>POS MASTERCARD, 9512</guest_name>
+    </reservation_info>
+  </transaction>
+</city_ledger>

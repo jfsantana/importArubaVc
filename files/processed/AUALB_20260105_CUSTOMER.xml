@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<customers hotel_code="AUALB" date="2026-01-05">
+  <customer internal_id="19087">
+    <customer_type>INDIVIDUAL</customer_type>
+    <name>Cordova, Giovanna</name>
+    <passport_no>XXXXXXXXX</passport_no>
+    <nationality>PE</nationality>
+    <address_info>
+      <address1>CALLE SAN MARTIN 760 APT 603</address1>
+      <city>LIMA</city>
+      <zip_code>15047</zip_code>
+      <country>PE</country>
+      <country_name>Peru</country_name>
+    </address_info>
+    <communication_info>
+      <email>CORDOVAPANICCIA@GMAIL.COM</email>
+      <phone>980960263</phone>
+    </communication_info>
+  </customer>
+  <customer internal_id="20588">
+    <customer_type>INDIVIDUAL</customer_type>
+    <name>Gill, Michael Anthony</name>
+    <passport_no>XXXXXXXXX</passport_no>
+    <nationality>CA</nationality>
+    <address_info>
+      <address1>87 YORKLAND</address1>
+      <city>RICHMOUNT HILL</city>
+      <zip_code>14C925</zip_code>
+      <state>ON</state>
+      <country>CA</country>
+      <country_name>Canada</country_name>
+    </address_info>
+    <communication_info>
+      <email>MICHEALGILL502@HOTMAIL.COM</email>
+      <phone>4169928268</phone>
+    </communication_info>
+  </customer>
+  <customer internal_id="20617">
+    <customer_type>COMPANY</customer_type>
+    <name>IHG POINTS</name>
+    <legal_name>IHG POINTS</legal_name>
+    <address_info>
+      <address1>L.G. SMITH BLVD 2</address1>
+      <city>ORANJESTAD</city>
+      <zip_code>00000</zip_code>
+      <country>AW</country>
+      <country_name>Aruba</country_name>
+    </address_info>
+    <communication_info>
+      <phone>594-3325</phone>
+    </communication_info>
+  </customer>
+  <customer internal_id="22588">
+    <customer_type>INDIVIDUAL</customer_type>
+    <name>TJON A MEEUW, JOHN ALEXIS</name>
+    <passport_no>XXXXXXXXX</passport_no>
+    <nationality>NL</nationality>
+    <address_info>
+      <address1>BANTYRAS</address1>
+      <zip_code>32065C</zip_code>
+      <country>NL</country>
+      <country_name>Netherlands</country_name>
+    </address_info>
+    <communication_info>
+      <email>JATMEEUW@GMAIL.COM</email>
+      <phone>0615236421</phone>
+    </communication_info>
+  </customer>
+  <customer internal_id="22615">
+    <customer_type>INDIVIDUAL</customer_type>
+    <name>Eshalomi, Krystopherous</name>
+    <passport_no>XXXXXXXXX</passport_no>
+    <nationality>US</nationality>
+    <address_info>
+      <address1>230 E Broadway 410</address1>
+      <city>Salt Lake City</city>
+      <zip_code>84111</zip_code>
+      <state>UT</state>
+      <country>US</country>
+      <country_name>United States</country_name>
+    </address_info>
+    <communication_info>
+      <email>krysrock@gmail.com</email>
+      <phone>8017551791</phone>
+    </communication_info>
+  </customer>
+  <customer internal_id="22637">
+    <customer_type>INDIVIDUAL</customer_type>
+    <name>Perry Iii, Michael</name>
+    <passport_no>XXXXXXXXX</passport_no>
+    <nationality>US</nationality>
+    <address_info>
+      <address1>5404 Manor Park Drive</address1>
+      <country>US</country>
+      <country_name>United States</country_name>
+    </address_info>
+    <communication_info>
+      <email>AGOLFER2222@YAHOO.COM</email>
+      <phone>+18172197661</phone>
+    </communication_info>
+  </customer>
+  <customer internal_id="22646">
+    <customer_type>INDIVIDUAL</customer_type>
+    <name>Guzman-Urbano, Mateo</name>
+    <passport_no>XXXXXXXXX</passport_no>
+    <nationality>NO</nationality>
+    <address_info>
+      <address1>Eiriks Gate 14</address1>
+      <city>Oslo</city>
+      <zip_code>0650</zip_code>
+      <country>US</country>
+      <country_name>United States</country_name>
+    </address_info>
+    <communication_info>
+      <phone>+4747792201</phone>
+    </communication_info>
+  </customer>
+  <customer internal_id="22672">
+    <customer_type>INDIVIDUAL</customer_type>
+    <name>Dave, Kinjal</name>
+    <passport_no>XXXXXXXX</passport_no>
+    <nationality>IN</nationality>
+    <address_info>
+      <address1>41866 NIGHT NURSE LIR</address1>
+      <city>Ashburn</city>
+      <zip_code>20148</zip_code>
+      <state>VA</state>
+      <country>US</country>
+      <country_name>United States</country_name>
+    </address_info>
+    <communication_info>
+      <email>KINJALIS@GMAIL.COM</email>
+      <phone>023454355</phone>
+    </communication_info>
+  </customer>
+  <customer internal_id="22677">
+    <customer_type>INDIVIDUAL</customer_type>
+    <name>Dingler, Lawrence</name>
+    <passport_no>XXXXXXXXX</passport_no>
+    <nationality>US</nationality>
+    <address_info>
+      <address1>277 Victoria Chase</address1>
+      <city>Pottstown</city>
+      <zip_code>19465</zip_code>
+      <state>PA</state>
+      <country>US</country>
+      <country_name>United States</country_name>
+    </address_info>
+    <communication_info>
+      <email>LDINGLER@GMAIL.COM</email>
+      <phone>+13026704152</phone>
+    </communication_info>
+  </customer>
+  <customer internal_id="22679">
+    <customer_type>INDIVIDUAL</customer_type>
+    <name>SESANA, MARIA DEL CARMEN</name>
+    <passport_no>XXXXXXXXX</passport_no>
+    <nationality>AR</nationality>
+    <address_info>
+      <address1>BALCORCE 27E</address1>
+      <city>NOSANIO</city>
+      <zip_code>2000</zip_code>
+      <country>AR</country>
+      <country_name>Argentina</country_name>
+    </address_info>
+    <communication_info/>
+  </customer>
+  <customer internal_id="22681">
+    <customer_type>INDIVIDUAL</customer_type>
+    <name>Santos, Daniela</name>
+    <passport_no>XXXXXXXX</passport_no>
+    <nationality>BR</nationality>
+    <address_info>
+      <address1>30A ESPERANCA 229</address1>
+      <city>SAO PAOLO</city>
+      <zip_code>03408-000</zip_code>
+      <country>BR</country>
+      <country_name>Brazil</country_name>
+    </address_info>
+    <communication_info>
+      <email>RICARDOSFRANCO@TERRA.BN</email>
+      <phone>011951060351</phone>
+    </communication_info>
+  </customer>
+  <customer internal_id="22696">
+    <customer_type>INDIVIDUAL</customer_type>
+    <name>Mckinley, Sarah</name>
+    <passport_no>XXXXXXXXX</passport_no>
+    <nationality>US</nationality>
+    <address_info>
+      <address1>1101 W Forest Ave</address1>
+      <city>La Porte</city>
+      <zip_code>77571</zip_code>
+      <state>TX</state>
+      <country>US</country>
+      <country_name>United States</country_name>
+    </address_info>
+    <communication_info>
+      <email>sarah.mckinley@redbull.com</email>
+      <phone>2817447849</phone>
+    </communication_info>
+  </customer>
+  <customer internal_id="22698">
+    <customer_type>INDIVIDUAL</customer_type>
+    <name>Gregory, Michael</name>
+    <address_info>
+      <address1>1908 Price Road</address1>
+      <country>US</country>
+      <country_name>United States</country_name>
+    </address_info>
+    <communication_info>
+      <phone>+1(443) 324-4102</phone>
+    </communication_info>
+  </customer>
+  <customer internal_id="22699">
+    <customer_type>INDIVIDUAL</customer_type>
+    <name>Cassidy, Gary</name>
+    <address_info>
+      <address1>5115 Alysheba Drive</address1>
+      <city>Indian Trail</city>
+      <zip_code>28079</zip_code>
+      <state>NC</state>
+      <country>US</country>
+      <country_name>United States</country_name>
+    </address_info>
+    <communication_info>
+      <phone>2488210456</phone>
+    </communication_info>
+  </customer>
+  <customer internal_id="22709">
+    <customer_type>INDIVIDUAL</customer_type>
+    <name>Aburto, Iviss</name>
+    <address_info>
+      <country>US</country>
+      <country_name>United States</country_name>
+    </address_info>
+    <communication_info>
+      <phone>3057662035</phone>
+    </communication_info>
+  </customer>
+</customers>
