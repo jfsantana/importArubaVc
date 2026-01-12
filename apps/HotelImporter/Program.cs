@@ -133,7 +133,9 @@ namespace HotelImporter
             string dbPassword = "";
 
             // Busca el archivo .env en el directorio de ejecución
-            string envPath = Path.Combine(Directory.GetCurrentDirectory(), ".env");
+            // Prioridad: Junto al ejecutable (QA/Prod) -> Directorio actual (Dev/dotnet run)
+            string envPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ".env");
+            if (!File.Exists(envPath)) envPath = Path.Combine(Directory.GetCurrentDirectory(), ".env");
             
             if (File.Exists(envPath))
             {
