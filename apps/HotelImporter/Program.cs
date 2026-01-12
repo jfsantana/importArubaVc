@@ -6,9 +6,9 @@ namespace HotelImporter
     class Program
     {
         // 1. CONFIGURACIÓN DE RUTAS FÍSICAS
-        static string inputFolder;
-        static string processedFolder;
-        static string errorFolder; // Carpeta para aislar archivos fallidos
+        static string inputFolder = string.Empty;
+        static string processedFolder = string.Empty;
+        static string errorFolder = string.Empty; // Carpeta para aislar archivos fallidos
 
         static void Main(string[] args)
         {
@@ -92,7 +92,7 @@ namespace HotelImporter
             if (nameUpper.Contains("CITY_LEDGER")) return "sp_Import_Hotel_CityLedger";
             if (nameUpper.Contains("REVENUE"))    return "sp_Import_Hotel_Revenue";
 
-            return null; // Retorna null si no sabe qué es
+            return string.Empty; // Retorna vacío si no sabe qué es
         }
 
         // Utilidad para mover archivos de forma segura (sobrescribiendo si existen)

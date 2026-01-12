@@ -62,3 +62,4 @@ E:\arubavc\apps\HotelImporter\obj\Debug\net10.0\refint\HotelImporter.dll
 E:\arubavc\apps\HotelImporter\obj\Debug\net10.0\HotelImporter.pdb
 E:\arubavc\apps\HotelImporter\obj\Debug\net10.0\HotelImporter.genruntimeconfig.cache
 E:\arubavc\apps\HotelImporter\obj\Debug\net10.0\ref\HotelImporter.dll
+E:\arubavc\apps\HotelImporter\obj\Debug\net10.0\HotelImporter.sourcelink.json
