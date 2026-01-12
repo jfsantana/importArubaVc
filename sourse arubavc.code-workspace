@@ -5,6 +5,7 @@
 		}
 	],
 	"settings": {
-		"xml.downloadExternalResources.enabled": true
+		"xml.downloadExternalResources.enabled": true,
+		"FSharp.suggestGitignore": false
 	}
 }

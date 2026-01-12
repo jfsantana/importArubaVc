@@ -6,12 +6,14 @@ namespace HotelImporter
     class Program
     {
         // 1. CONFIGURACIÓN DE RUTAS FÍSICAS
-        static string inputFolder = @"E:\arubavc\files";
-        static string processedFolder = @"E:\arubavc\files\processed";
-        static string errorFolder = @"E:\arubavc\files\error"; // Carpeta para aislar archivos fallidos
+        static string inputFolder;
+        static string processedFolder;
+        static string errorFolder; // Carpeta para aislar archivos fallidos
 
         static void Main(string[] args)
         {
+            LoadEnvConfig();
+
             Console.Title = "Hotel Data Importer - Orquestador";
             Console.WriteLine("==========================================");
             Console.WriteLine("   INICIANDO ORQUESTADOR DE INTEGRACIÓN   ");
@@ -115,6 +117,65 @@ namespace HotelImporter
             if (!Directory.Exists(inputFolder)) Directory.CreateDirectory(inputFolder);
             if (!Directory.Exists(processedFolder)) Directory.CreateDirectory(processedFolder);
             if (!Directory.Exists(errorFolder)) Directory.CreateDirectory(errorFolder);
+        }
+
+        static void LoadEnvConfig()
+        {
+            // Valores por defecto (Para tu entorno local E:\)
+            inputFolder = @"E:\arubavc\files";
+            processedFolder = @"E:\arubavc\files\processed";
+            errorFolder = @"E:\arubavc\files\error";
+            
+            // Configuración Base de Datos por defecto (Local)
+            string dbServer = @".\SQL_JSANTANA";
+            string dbName = "arubavcImport";
+            string dbUser = "";
+            string dbPassword = "";
+
+            // Busca el archivo .env en el directorio de ejecución
+            string envPath = Path.Combine(Directory.GetCurrentDirectory(), ".env");
+            
+            if (File.Exists(envPath))
+            {
+                Console.WriteLine($"[CONFIG] Sobrescribiendo configuración desde: {envPath}");
+                foreach (var line in File.ReadAllLines(envPath))
+                {
+                    if (string.IsNullOrWhiteSpace(line) || line.Trim().StartsWith("#")) continue;
+
+                    var parts = line.Split('=', 2);
+                    if (parts.Length == 2)
+                    {
+                        string key = parts[0].Trim();
+                        string val = parts[1].Trim();
+
+                        if (key == "INPUT_FOLDER") inputFolder = val;
+                        if (key == "PROCESSED_FOLDER") processedFolder = val;
+                        if (key == "ERROR_FOLDER") errorFolder = val;
+                        
+                        // Lectura de credenciales de BD
+                        if (key == "DB_SERVER") dbServer = val;
+                        if (key == "DB_NAME") dbName = val;
+                        if (key == "DB_USER") dbUser = val;
+                        if (key == "DB_PASSWORD") dbPassword = val;
+                    }
+                }
+            }
+            
+            // Construir cadena de conexión dinámica
+            string connString;
+            if (!string.IsNullOrEmpty(dbUser) && !string.IsNullOrEmpty(dbPassword))
+            {
+                // QA / PROD: Usar Autenticación SQL si hay usuario/clave
+                connString = $"Server={dbServer};Database={dbName};User Id={dbUser};Password={dbPassword};TrustServerCertificate=True;";
+            }
+            else
+            {
+                // LOCAL: Usar Autenticación de Windows (Integrated Security)
+                connString = $"Server={dbServer};Database={dbName};Integrated Security=True;TrustServerCertificate=True;";
+            }
+            
+            // Inyectar la configuración al Helper
+            DatabaseHelper.SetConnectionString(connString);
         }
     }
 }
