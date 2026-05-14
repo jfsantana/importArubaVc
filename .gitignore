@@ -3,7 +3,7 @@ apps/requerido/
 .env
 
 
-# --- Ignorar carpetas de datos (y sus subcarpetas) ---
+# --- IgnoraSSr carpetas de datos (y sus subcarpetas) ---
 files/
 
 # --- Ignorar carpeta de despliegue (exe y configs) ---
