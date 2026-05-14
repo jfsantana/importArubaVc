@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\arubavc\\apps\\HotelImporter\\HotelImporter.csproj": {}
+    "O:\\importArubaVc\\apps\\HotelImporter\\HotelImporter.csproj": {}
   },
   "projects": {
-    "E:\\arubavc\\apps\\HotelImporter\\HotelImporter.csproj": {
+    "O:\\importArubaVc\\apps\\HotelImporter\\HotelImporter.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\arubavc\\apps\\HotelImporter\\HotelImporter.csproj",
+        "projectUniqueName": "O:\\importArubaVc\\apps\\HotelImporter\\HotelImporter.csproj",
         "projectName": "HotelImporter",
-        "projectPath": "E:\\arubavc\\apps\\HotelImporter\\HotelImporter.csproj",
-        "packagesPath": "C:\\Users\\Jesus.Santana\\.nuget\\packages\\",
-        "outputPath": "E:\\arubavc\\apps\\HotelImporter\\obj\\",
+        "projectPath": "O:\\importArubaVc\\apps\\HotelImporter\\HotelImporter.csproj",
+        "packagesPath": "C:\\Users\\Administrador.WIN-3PTUAOKTK4L\\.nuget\\packages\\",
+        "outputPath": "O:\\importArubaVc\\apps\\HotelImporter\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Jesus.Santana\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Administrador.WIN-3PTUAOKTK4L\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
@@ -44,6 +44,10 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "dependencies": {
+            "DotNetEnv": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
             "Microsoft.Data.SqlClient": {
               "target": "Package",
               "version": "[6.1.3, )"

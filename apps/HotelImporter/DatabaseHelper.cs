@@ -7,8 +7,7 @@ namespace HotelImporter
 {
     public static class DatabaseHelper
     {
-        // ⚠️ IMPORTANTE: Ajusta el Server a tu instancia real. 
-        // Si usas autenticación de Windows, deja Integrated Security=True.
+        
         // Si tienes usuario y clave, usa: "Server=.;Database=arubavcImport;User Id=sa;Password=tuClave;"
         //private static string _connectionString = "Server=localhost;Database=arubavcImport;Integrated Security=True;";
         private static string _connectionString = @"Server=.\SQL_JSANTANA;Database=arubavcImport;Integrated Security=True;TrustServerCertificate=True;";

@@ -5,7 +5,7 @@ namespace HotelImporter
 {
     class Program
     {
-        // 1. CONFIGURACIÓN DE RUTAS FÍSICAS
+        
         static string inputFolder;
         static string processedFolder;
         static string errorFolder; // Carpeta para aislar archivos fallidos
@@ -20,21 +20,18 @@ namespace HotelImporter
             Console.WriteLine("==========================================");
             Console.WriteLine($"[INFO] Monitoreando ruta: {inputFolder}");
 
-            // 2. VERIFICACIÓN DE CARPETAS (Las crea si no existen)
             EnsureDirectories();
 
-            // 3. OBTENER ARCHIVOS XML
             string[] files = Directory.GetFiles(inputFolder, "*.xml");
             Console.WriteLine($"[INFO] Archivos detectados: {files.Length}");
 
             if (files.Length == 0)
             {
                 Console.WriteLine("\nNo hay nada pendiente. Presiona ENTER para salir.");
-                Console.ReadLine();
+                //Console.ReadLine();
                 return;
             }
 
-            // 4. BUCLE DE PROCESAMIENTO
             foreach (string filePath in files)
             {
                 string fileName = Path.GetFileName(filePath);
@@ -42,23 +39,18 @@ namespace HotelImporter
 
                 try
                 {
-                    // A. Identificar Estrategia (Qué SP usar)
                     string spToUse = IdentifyStoredProcedure(fileName);
                     
                     if (string.IsNullOrEmpty(spToUse))
                         throw new Exception("Tipo de archivo no reconocido por el nombre.");
 
-                    // B. Leer contenido del XML
                     string xmlContent = File.ReadAllText(filePath);
-                    // PARCHE PARA SQL SERVER: Eliminamos la declaración de encoding para evitar el error "unable to switch encoding"
                     xmlContent = xmlContent.Replace("encoding=\"UTF-8\"", "").Replace("encoding=\"utf-8\"", "");
                     
 
-                    // C. Enviar a SQL Server
                     Console.WriteLine($"    Ejecutando SP: {spToUse}...");
                     DatabaseHelper.ExecuteImportSp(spToUse, fileName, xmlContent);
 
-                    // D. Mover a carpeta 'Processed' (Éxito)
                     MoveFile(filePath, processedFolder);
                     
                     Console.ForegroundColor = ConsoleColor.Green;
@@ -67,22 +59,19 @@ namespace HotelImporter
                 }
                 catch (Exception ex)
                 {
-                    // MANEJO DE ERRORES
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine($"    [ERROR] {ex.Message}");
                     Console.ResetColor();
 
-                    // Mover a carpeta 'Error' para no bloquear el siguiente
                     MoveFile(filePath, errorFolder);
                 }
             }
 
             Console.WriteLine("\n==========================================");
             Console.WriteLine("PROCESO TERMINADO. Presiona ENTER.");
-            Console.ReadLine();
+           // Console.ReadLine();
         }
 
-        // Lógica para decidir qué SP usar según el nombre del archivo
         static string IdentifyStoredProcedure(string fileName)
         {
             string nameUpper = fileName.ToUpper();
@@ -95,7 +84,6 @@ namespace HotelImporter
             return null; // Retorna null si no sabe qué es
         }
 
-        // Utilidad para mover archivos de forma segura (sobrescribiendo si existen)
         static void MoveFile(string source, string destFolder)
         {
             try
@@ -121,18 +109,15 @@ namespace HotelImporter
 
         static void LoadEnvConfig()
         {
-            // Valores por defecto (Para tu entorno local E:\)
             inputFolder = @"E:\arubavc\files";
             processedFolder = @"E:\arubavc\files\processed";
             errorFolder = @"E:\arubavc\files\error";
             
-            // Configuración Base de Datos por defecto (Local)
             string dbServer = @".\SQL_JSANTANA";
             string dbName = "arubavcImport";
             string dbUser = "";
             string dbPassword = "";
 
-            // Busca el archivo .env en el directorio de ejecución
             string envPath = Path.Combine(Directory.GetCurrentDirectory(), ".env");
             
             if (File.Exists(envPath))
@@ -152,7 +137,6 @@ namespace HotelImporter
                         if (key == "PROCESSED_FOLDER") processedFolder = val;
                         if (key == "ERROR_FOLDER") errorFolder = val;
                         
-                        // Lectura de credenciales de BD
                         if (key == "DB_SERVER") dbServer = val;
                         if (key == "DB_NAME") dbName = val;
                         if (key == "DB_USER") dbUser = val;
@@ -161,20 +145,16 @@ namespace HotelImporter
                 }
             }
             
-            // Construir cadena de conexión dinámica
             string connString;
             if (!string.IsNullOrEmpty(dbUser) && !string.IsNullOrEmpty(dbPassword))
             {
-                // QA / PROD: Usar Autenticación SQL si hay usuario/clave
                 connString = $"Server={dbServer};Database={dbName};User Id={dbUser};Password={dbPassword};TrustServerCertificate=True;";
             }
             else
             {
-                // LOCAL: Usar Autenticación de Windows (Integrated Security)
                 connString = $"Server={dbServer};Database={dbName};Integrated Security=True;TrustServerCertificate=True;";
             }
             
-            // Inyectar la configuración al Helper
             DatabaseHelper.SetConnectionString(connString);
         }
     }

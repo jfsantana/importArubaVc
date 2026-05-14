@@ -1,3 +1,17 @@
 apps/requerido/
 apps/requerido/
 .env
+
+
+# --- Ignorar carpetas de datos (y sus subcarpetas) ---
+files/
+
+# --- Ignorar carpeta de despliegue (exe y configs) ---
+deploy/
+
+# --- Ignorar archivos de entorno (Seguridad) ---
+.env
+
+# --- Ignorar archivos temporales de compilación (Standard .NET) ---
+**/bin/
+**/obj/
