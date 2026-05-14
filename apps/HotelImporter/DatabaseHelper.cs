@@ -27,11 +27,9 @@ namespace HotelImporter
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    // Pasamos los parámetros estándar que definimos en los 4 SPs
-                    cmd.Parameters.AddWithValue("@FileName", fileName);
+                     cmd.Parameters.AddWithValue("@FileName", fileName);
                     cmd.Parameters.AddWithValue("@XmlData", xmlContent);
-
-                    // Ejecutamos (esto puede tardar unos milisegundos)
+ 
                     cmd.ExecuteNonQuery();
                 }
             }
