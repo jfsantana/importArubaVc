@@ -134,10 +134,11 @@ namespace HotelImporter
         {
             string nameUpper = fileName.ToUpper();
 
-            if (nameUpper.Contains("STATISTICS")) return "sp_Import_Hotel_Statistics";
-            if (nameUpper.Contains("CUSTOMER"))   return "sp_Import_Hotel_Customers";
-            if (nameUpper.Contains("CITY_LEDGER")) return "sp_Import_Hotel_CityLedger";
-            if (nameUpper.Contains("REVENUE"))    return "sp_Import_Hotel_Revenue";
+            if (nameUpper.Contains("STATISTICS"))   return "sp_Import_Hotel_Statistics";
+            if (nameUpper.Contains("CUSTOMER"))     return "sp_Import_Hotel_Customers";
+            if (nameUpper.Contains("CITY_LEDGER"))  return "sp_Import_Hotel_CityLedger";
+            if (nameUpper.Contains("REVENUE"))      return "sp_Import_Hotel_Revenue";
+            if (nameUpper.Contains("DETAIL_AVAIL")) return "sp_Import_Hotel_ForecastOcc";
 
             return string.Empty; // Retorna vacío si no sabe qué es
         }

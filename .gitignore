@@ -1,3 +1,4 @@
 apps/requerido/
 apps/requerido/
 .env
+apps/HotelImporter/bin/Debug/*
