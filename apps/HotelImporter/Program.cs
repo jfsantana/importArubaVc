@@ -69,6 +69,24 @@ namespace HotelImporter
                     Console.WriteLine($"    Ejecutando SP: {spToUse}...");
                     DatabaseHelper.ExecuteImportSp(spToUse, fileName, xmlContent);
 
+                    // ------------------------------------------------------------------
+                    // POST-PROCESO ESPECÍFICO
+                    // Solo cuando el archivo procesado es resfutureoccupancy*****.xml
+                    // se dispara el SP que recalcula la proyección de directores.
+                    // Para CUALQUIER otro archivo, este bloque NO se ejecuta.
+                    // ------------------------------------------------------------------
+                    string postProcessInfo = string.Empty;
+                    if (fileName.ToUpper().Contains("RESFUTUREOCCUPANCY"))
+                    {
+                        const string postSp = "SP_Cargar_Proyeccion_Directores";
+                        Console.WriteLine($"    Ejecutando post-proceso: {postSp}...");
+                        DatabaseHelper.ExecuteSimpleSp(postSp);
+                        postProcessInfo = $" + {postSp}";
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine($"    [OK] Post-proceso ejecutado.");
+                        Console.ResetColor();
+                    }
+
                     MoveFile(filePath, processedFolder);
                     
                     Console.ForegroundColor = ConsoleColor.Green;
@@ -76,7 +94,7 @@ namespace HotelImporter
                     Console.ResetColor();
                     
                     successCount++;
-                    htmlRows.Append($"<tr style='background-color: #e8f5e9;'><td>{fileName}</td><td style='color:green;font-weight:bold;'>EXITOSO</td><td>{spToUse}</td></tr>");
+                    htmlRows.Append($"<tr style='background-color: #e8f5e9;'><td>{fileName}</td><td style='color:green;font-weight:bold;'>EXITOSO</td><td>{spToUse}{postProcessInfo}</td></tr>");
                 }
                 catch (Exception ex)
                 {
