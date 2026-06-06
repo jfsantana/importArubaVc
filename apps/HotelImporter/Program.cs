@@ -126,6 +126,12 @@ namespace HotelImporter
         {
             string nameUpper = fileName.ToUpper();
 
+            // IMPORTANTE: el check de RESFUTUREOCCUPANCY debe ir ANTES que cualquier
+            // otro que pueda colisionar por substring. Como su nombre es único
+            // (resfutureoccupancy*****.xml) no hay riesgo, pero lo dejamos arriba
+            // para evitar confusiones futuras.
+            if (nameUpper.Contains("RESFUTUREOCCUPANCY")) return "sp_Import_Hotel_FutureOccupancy";
+
             if (nameUpper.Contains("STATISTICS"))   return "sp_Import_Hotel_Statistics";
             if (nameUpper.Contains("CUSTOMER"))     return "sp_Import_Hotel_Customers";
             if (nameUpper.Contains("CITY_LEDGER"))  return "sp_Import_Hotel_CityLedger";
