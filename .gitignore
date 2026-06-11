@@ -2,3 +2,22 @@ apps/requerido/
 apps/requerido/
 .env
 apps/HotelImporter/bin/Debug/*
+
+
+# ==========================================
+# Archivos de Datos y Volcados
+# ==========================================
+# Ignorar todos los archivos XML, ya que suelen ser datos de prueba
+*.xml
+
+
+# ==========================================
+# Archivos Temporales del Sistema y Logs
+# ==========================================
+*.log
+*.bak
+*.tmp
+
+# Archivos de sistema de Windows/Mac
+Thumbs.db
+.DS_Store
