@@ -3,6 +3,8 @@ using System.IO;
 using System.Text;
 using System.Net;
 using System.Net.Mail;
+using System.IO.Compression;
+using System.Linq;
 
 namespace HotelImporter
 {
@@ -12,6 +14,7 @@ namespace HotelImporter
         static string inputFolder = string.Empty;
         static string processedFolder = string.Empty;
         static string errorFolder = string.Empty; // Carpeta para aislar archivos con error
+        static string auditRootFolder = string.Empty; // Nueva ruta de auditoria para .aud
         
         // 2. CONFIGURACIÓN DE CORREO
         static string smtpHost = string.Empty;
@@ -33,6 +36,7 @@ namespace HotelImporter
             Console.WriteLine($"[INFO] Monitoreando ruta: {inputFolder}");
 
             EnsureDirectories();
+            PrepareFutureOccupancyFromAudit();
 
             string[] files = Directory.GetFiles(inputFolder, "*.xml");
             Console.WriteLine($"[INFO] Archivos detectados: {files.Length}");
@@ -214,11 +218,84 @@ namespace HotelImporter
             if (!Directory.Exists(errorFolder)) Directory.CreateDirectory(errorFolder);
         }
 
+        static void PrepareFutureOccupancyFromAudit()
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(auditRootFolder)) return;
+
+                DateTime targetDay = DateTime.Today.AddDays(-1);
+                string dailyFolderName = targetDay.ToString("MMddyy"); // Formato requerido: MMDDAA (ej: 061026)
+                string dailyAuditFolder = Path.Combine(auditRootFolder, dailyFolderName);
+
+                if (!Directory.Exists(dailyAuditFolder))
+                {
+                    Console.WriteLine($"[AUDIT] No existe carpeta del dia anterior con formato MMDDAA: {dailyAuditFolder}");
+                    return;
+                }
+
+                string[] audFiles = Directory
+                    .GetFiles(dailyAuditFolder, "*.aud")
+                    .OrderByDescending(File.GetLastWriteTimeUtc)
+                    .ToArray();
+
+                if (audFiles.Length == 0)
+                {
+                    Console.WriteLine($"[AUDIT] No hay archivos .aud en: {dailyAuditFolder}");
+                    return;
+                }
+
+                foreach (var audFile in audFiles)
+                {
+                    string targetFileName = $"resfutureoccupancy_{dailyFolderName}_{Path.GetFileNameWithoutExtension(audFile)}.xml";
+                    string targetInputPath = Path.Combine(inputFolder, targetFileName);
+                    string targetProcessedPath = Path.Combine(processedFolder, targetFileName);
+                    string targetErrorPath = Path.Combine(errorFolder, targetFileName);
+
+                    if (File.Exists(targetInputPath) || File.Exists(targetProcessedPath) || File.Exists(targetErrorPath))
+                    {
+                        Console.WriteLine($"[AUDIT] Ya preparado anteriormente: {targetFileName}");
+                        continue;
+                    }
+
+                    using (FileStream fs = File.OpenRead(audFile))
+                    using (ZipArchive archive = new ZipArchive(fs, ZipArchiveMode.Read))
+                    {
+                        var xmlEntry = archive.Entries.FirstOrDefault(e =>
+                            !string.IsNullOrEmpty(e.Name) &&
+                            e.Name.EndsWith(".xml", StringComparison.OrdinalIgnoreCase));
+
+                        if (xmlEntry == null)
+                        {
+                            Console.WriteLine($"[AUDIT] El archivo no contiene XML: {Path.GetFileName(audFile)}");
+                            continue;
+                        }
+
+                        using (Stream source = xmlEntry.Open())
+                        using (FileStream dest = File.Create(targetInputPath))
+                        {
+                            source.CopyTo(dest);
+                        }
+
+                        Console.WriteLine($"[AUDIT] XML extraido desde {Path.GetFileName(audFile)} -> {targetFileName}");
+                        return;
+                    }
+                }
+
+                Console.WriteLine("[AUDIT] No fue posible preparar XML de ocupacion futura desde los .aud detectados.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[AUDIT] Error preparando XML desde .aud: {ex.Message}");
+            }
+        }
+
         static void LoadEnvConfig()
         {
             inputFolder = @"E:\arubavc\files";
             processedFolder = @"E:\arubavc\files\processed";
             errorFolder = @"E:\arubavc\files\error";
+            auditRootFolder = @"\\10.130.112.12\aualb\audit";
             
             string dbServer = @".\SQL_JSANTANA";
             string dbName = "arubavcImport";
@@ -250,6 +327,7 @@ namespace HotelImporter
                         if (key == "INPUT_FOLDER") inputFolder = val;
                         if (key == "PROCESSED_FOLDER") processedFolder = val;
                         if (key == "ERROR_FOLDER") errorFolder = val;
+                        if (key == "AUDIT_ROOT_FOLDER") auditRootFolder = val;
                         
                         if (key == "DB_SERVER") dbServer = val;
                         if (key == "DB_NAME") dbName = val;
