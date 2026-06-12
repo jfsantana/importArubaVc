@@ -1,0 +1,21 @@
+# CONFIGURACIÓN PRD
+
+INPUT_FOLDER=O:\
+PROCESSED_FOLDER=O:\importArubaVc\files\processed
+ERROR_FOLDER=O:\importArubaVc\files\error
+AUDIT_ROOT_FOLDER=\\10.130.112.12\aualb\audit
+
+# Base de Datos 
+DB_SERVER=SERVER-ICG\ICG23
+DB_NAME=GESTION_TOTT
+DB_USER=sa
+DB_PASSWORD=masterkey
+
+# Configuración de Notificaciones por Correo
+# Si SMTP_HOST o EMAIL_TO están vacíos, no se enviará correo.
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=no_reply@ghhoteles.com.ve
+SMTP_PASS=tiqsrieovljopqpj
+EMAIL_FROM=no_reply@ghhoteles.com.ve
+EMAIL_TO=ayanes@rafay.com,jfsantana77@gmail.com
