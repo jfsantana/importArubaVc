@@ -43,8 +43,16 @@ namespace HotelImporter
 
             if (files.Length == 0)
             {
-                Console.WriteLine("\nNo hay nada pendiente. Presiona ENTER para salir.");
-                //Console.ReadLine();
+                Console.WriteLine("\nNo hay archivos pendientes.");
+                SendEmailReport($@"
+<html><body style='font-family:Arial,sans-serif;'>
+<h2 style='color:#333;'>Reporte de Ejecución - HotelImporter</h2>
+<div style='padding:15px;background:#f5f5f5;border-radius:5px;'>
+  <p><strong>Fecha:</strong> {DateTime.Now:yyyy-MM-dd HH:mm:ss}</p>
+  <p><strong>Total Archivos:</strong> 0</p>
+  <p style='color:gray;'>No había archivos pendientes para procesar en esta ejecución.</p>
+</div>
+</body></html>");
                 return;
             }
 
