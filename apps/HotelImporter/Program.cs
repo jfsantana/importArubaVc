@@ -222,11 +222,20 @@ namespace HotelImporter
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(auditRootFolder)) return;
+                if (string.IsNullOrWhiteSpace(auditRootFolder))
+                {
+                    Console.WriteLine("[AUDIT] AUDIT_ROOT_FOLDER no configurado. Se omite preparación de forecast.");
+                    return;
+                }
+
+                Console.WriteLine($"[AUDIT] Ruta raíz configurada: {auditRootFolder}");
 
                 DateTime targetDay = DateTime.Today.AddDays(-1);
                 string dailyFolderName = targetDay.ToString("MMddyy"); // Formato requerido: MMDDAA (ej: 061026)
                 string dailyAuditFolder = Path.Combine(auditRootFolder, dailyFolderName);
+
+                Console.WriteLine($"[AUDIT] Fecha objetivo: {targetDay:yyyy-MM-dd}");
+                Console.WriteLine($"[AUDIT] Carpeta diaria esperada: {dailyAuditFolder}");
 
                 if (!Directory.Exists(dailyAuditFolder))
                 {
@@ -239,28 +248,51 @@ namespace HotelImporter
                     .OrderByDescending(File.GetLastWriteTimeUtc)
                     .ToArray();
 
+                Console.WriteLine($"[AUDIT] Archivos .aud detectados: {audFiles.Length}");
+
                 if (audFiles.Length == 0)
                 {
                     Console.WriteLine($"[AUDIT] No hay archivos .aud en: {dailyAuditFolder}");
                     return;
                 }
 
+                int duplicateCount = 0;
+                int noXmlCount = 0;
+
                 foreach (var audFile in audFiles)
                 {
+                    Console.WriteLine($"[AUDIT] Evaluando .aud: {audFile}");
+
                     string targetFileName = $"resfutureoccupancy_{dailyFolderName}_{Path.GetFileNameWithoutExtension(audFile)}.xml";
                     string targetInputPath = Path.Combine(inputFolder, targetFileName);
                     string targetProcessedPath = Path.Combine(processedFolder, targetFileName);
                     string targetErrorPath = Path.Combine(errorFolder, targetFileName);
 
-                    if (File.Exists(targetInputPath) || File.Exists(targetProcessedPath) || File.Exists(targetErrorPath))
+                    bool existsInInput = File.Exists(targetInputPath);
+                    bool existsInProcessed = File.Exists(targetProcessedPath);
+                    bool existsInError = File.Exists(targetErrorPath);
+
+                    Console.WriteLine($"[AUDIT] Destino generado: {targetFileName}");
+                    Console.WriteLine($"[AUDIT] Existe en input: {existsInInput} -> {targetInputPath}");
+                    Console.WriteLine($"[AUDIT] Existe en processed: {existsInProcessed} -> {targetProcessedPath}");
+                    Console.WriteLine($"[AUDIT] Existe en error: {existsInError} -> {targetErrorPath}");
+
+                    if (existsInInput || existsInProcessed || existsInError)
                     {
                         Console.WriteLine($"[AUDIT] Ya preparado anteriormente: {targetFileName}");
+                        duplicateCount++;
                         continue;
                     }
 
                     using (FileStream fs = File.OpenRead(audFile))
                     using (ZipArchive archive = new ZipArchive(fs, ZipArchiveMode.Read))
                     {
+                        Console.WriteLine($"[AUDIT] Entradas dentro del .aud: {archive.Entries.Count}");
+                        foreach (var entry in archive.Entries.Take(5))
+                        {
+                            Console.WriteLine($"[AUDIT] Entry detectada: {entry.FullName}");
+                        }
+
                         var xmlEntry = archive.Entries.FirstOrDefault(e =>
                             !string.IsNullOrEmpty(e.Name) &&
                             e.Name.EndsWith(".xml", StringComparison.OrdinalIgnoreCase));
@@ -268,8 +300,12 @@ namespace HotelImporter
                         if (xmlEntry == null)
                         {
                             Console.WriteLine($"[AUDIT] El archivo no contiene XML: {Path.GetFileName(audFile)}");
+                            noXmlCount++;
                             continue;
                         }
+
+                        Console.WriteLine($"[AUDIT] XML seleccionado para extraer: {xmlEntry.FullName}");
+                        Console.WriteLine($"[AUDIT] Extrayendo hacia: {targetInputPath}");
 
                         using (Stream source = xmlEntry.Open())
                         using (FileStream dest = File.Create(targetInputPath))
@@ -280,6 +316,18 @@ namespace HotelImporter
                         Console.WriteLine($"[AUDIT] XML extraido desde {Path.GetFileName(audFile)} -> {targetFileName}");
                         return;
                     }
+                }
+
+                if (duplicateCount > 0 && duplicateCount == audFiles.Length)
+                {
+                    Console.WriteLine("[AUDIT] Todos los .aud detectados fueron omitidos porque ya existía su XML preparado o procesado.");
+                    return;
+                }
+
+                if (noXmlCount > 0)
+                {
+                    Console.WriteLine("[AUDIT] Se revisaron .aud pero ninguno aportó un XML válido para preparar forecast.");
+                    return;
                 }
 
                 Console.WriteLine("[AUDIT] No fue posible preparar XML de ocupacion futura desde los .aud detectados.");

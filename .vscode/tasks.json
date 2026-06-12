@@ -1,0 +1,16 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build HotelImporter",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "build",
+        "${workspaceFolder}/apps/HotelImporter/HotelImporter.csproj"
+      ],
+      "group": "build",
+      "problemMatcher": ["$msCompile"]
+    }
+  ]
+}
