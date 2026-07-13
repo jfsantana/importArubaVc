@@ -28,8 +28,18 @@ namespace HotelImporter
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = commandTimeoutSeconds;
 
-                     cmd.Parameters.AddWithValue("@FileName", fileName);
+                    cmd.Parameters.AddWithValue("@FileName", fileName);
                     cmd.Parameters.AddWithValue("@XmlData", xmlContent);
+
+                    if (string.Equals(spName, "sp_Import_Hotel_CuentasPorCobrar", StringComparison.OrdinalIgnoreCase))
+                    {
+                        SqlParameter insertedRowsParam = new SqlParameter("@InsertedRows", SqlDbType.Int)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+
+                        cmd.Parameters.Add(insertedRowsParam);
+                    }
  
                     cmd.ExecuteNonQuery();
                 }

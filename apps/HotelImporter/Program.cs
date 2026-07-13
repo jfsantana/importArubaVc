@@ -16,6 +16,7 @@ namespace HotelImporter
         static string processedFolder = string.Empty;
         static string errorFolder = string.Empty; // Carpeta para aislar archivos con error
         static string auditRootFolder = string.Empty; // Nueva ruta de auditoria para .aud
+        static string cxcAuditRootFolder = string.Empty; // Ruta de auditoría para XML 029_
         
         // 2. CONFIGURACIÓN DE CORREO
         static string smtpHost = string.Empty;
@@ -30,7 +31,9 @@ namespace HotelImporter
 
         static void Main(string[] args)
         {
-            LoadEnvConfig();
+            try
+            {
+                LoadEnvConfig();
 
             Console.Title = "Hotel Data Importer - Orquestador";
             Console.WriteLine("==========================================");
@@ -40,6 +43,7 @@ namespace HotelImporter
 
             EnsureDirectories();
             PrepareFutureOccupancyFromAudit();
+            PrepareCuentasPorCobrarFromAudit();
 
             string[] files = Directory.GetFiles(inputFolder, "*.xml");
             Console.WriteLine($"[INFO] Archivos detectados: {files.Length}");
@@ -168,9 +172,27 @@ namespace HotelImporter
 
             SendEmailReport(htmlBody);
 
-            Console.WriteLine("\n==========================================");
-            Console.WriteLine("PROCESO TERMINADO. Presiona ENTER.");
-           // Console.ReadLine();
+                                Console.WriteLine("\n==========================================");
+                                Console.WriteLine("PROCESO TERMINADO. Presiona ENTER.");
+                             // Console.ReadLine();
+                        }
+                        catch (Exception ex)
+                        {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine($"[FATAL] Error no controlado en orquestador: {ex.Message}");
+                                Console.WriteLine(ex.ToString());
+                                Console.ResetColor();
+
+                                SendEmailReport($@"
+<html><body style='font-family:Arial,sans-serif;'>
+<h2 style='color:#b71c1c;'>[FATAL] HotelImporter detenido por excepción no controlada</h2>
+<div style='padding:15px;background:#ffebee;border-radius:5px;'>
+    <p><strong>Fecha:</strong> {DateTime.Now:yyyy-MM-dd HH:mm:ss}</p>
+    <p><strong>Mensaje:</strong> {ex.Message}</p>
+    <pre style='white-space:pre-wrap;background:#fff;padding:10px;border-radius:4px;border:1px solid #f0c0c0;'>{WebUtility.HtmlEncode(ex.ToString())}</pre>
+</div>
+</body></html>");
+                        }
         }
 
         static string IdentifyStoredProcedure(string fileName)
@@ -188,6 +210,7 @@ namespace HotelImporter
             if (nameUpper.Contains("CITY_LEDGER"))  return "sp_Import_Hotel_CityLedger";
             if (nameUpper.Contains("REVENUE"))      return "sp_Import_Hotel_Revenue";
             if (nameUpper.Contains("DETAIL_AVAIL")) return "sp_Import_Hotel_ForecastOcc";
+            if (nameUpper.Contains("029_"))         return "sp_Import_Hotel_CuentasPorCobrar";
 
             return string.Empty; // Retorna vacío si no sabe qué es
         }
@@ -382,12 +405,73 @@ namespace HotelImporter
             }
         }
 
+        static void PrepareCuentasPorCobrarFromAudit()
+        {
+            try
+            {
+                string auditPathToUse = string.IsNullOrWhiteSpace(cxcAuditRootFolder)
+                    ? auditRootFolder
+                    : cxcAuditRootFolder;
+
+                if (string.IsNullOrWhiteSpace(auditPathToUse))
+                {
+                    Console.WriteLine("[AUDIT-CXC] AUDIT_ROOT_FOLDER no configurado. Se omite preparación de CxC.");
+                    return;
+                }
+
+                Console.WriteLine($"[AUDIT-CXC] Buscando archivo 029_*.xml en auditoría...");
+
+                DateTime targetDay = DateTime.Today.AddDays(-1);
+                string dailyFolderName = targetDay.ToString("MMddyy");
+                string dailyAuditFolder = Path.Combine(auditPathToUse, dailyFolderName);
+
+                Console.WriteLine($"[AUDIT-CXC] Carpeta audit: {dailyAuditFolder}");
+
+                if (!Directory.Exists(dailyAuditFolder))
+                {
+                    Console.WriteLine($"[AUDIT-CXC] Carpeta no existe: {dailyAuditFolder}");
+                    return;
+                }
+
+                string sourceFile = Directory
+                    .GetFiles(dailyAuditFolder, "029_*.xml")
+                    .OrderByDescending(File.GetLastWriteTimeUtc)
+                    .FirstOrDefault();
+
+                if (string.IsNullOrEmpty(sourceFile))
+                {
+                    Console.WriteLine($"[AUDIT-CXC] No se encontró archivo 029_*.xml en {dailyAuditFolder}");
+                    return;
+                }
+
+                string targetFileName = $"029_{dailyFolderName}_{Path.GetFileNameWithoutExtension(sourceFile)}.xml";
+                string targetInputPath = Path.Combine(inputFolder, targetFileName);
+                string targetProcessedPath = Path.Combine(processedFolder, targetFileName);
+                string targetErrorPath = Path.Combine(errorFolder, targetFileName);
+
+                if (File.Exists(targetInputPath) || File.Exists(targetProcessedPath) || File.Exists(targetErrorPath))
+                {
+                    Console.WriteLine($"[AUDIT-CXC] Archivo CxC ya existe como preparado/procesado/error. Se omite.");
+                    return;
+                }
+
+                Console.WriteLine($"[AUDIT-CXC] Copiando: {sourceFile} -> {targetInputPath}");
+                File.Copy(sourceFile, targetInputPath, overwrite: false);
+                Console.WriteLine($"[AUDIT-CXC] [OK] Archivo CxC preparado para importación.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[AUDIT-CXC] Error preparando CxC: {ex.Message}");
+            }
+        }
+
         static void LoadEnvConfig()
         {
             inputFolder = @"E:\arubavc\files";
             processedFolder = @"E:\arubavc\files\processed";
             errorFolder = @"E:\arubavc\files\error";
             auditRootFolder = @"\\10.130.112.12\aualb\audit";
+            cxcAuditRootFolder = @"\\10.130.112.12\Audit";
             
             string dbServer = @".\SQL_JSANTANA";
             string dbName = "arubavcImport";
@@ -420,6 +504,8 @@ namespace HotelImporter
                         if (key == "PROCESSED_FOLDER") processedFolder = val;
                         if (key == "ERROR_FOLDER") errorFolder = val;
                         if (key == "AUDIT_ROOT_FOLDER") auditRootFolder = val;
+                        if (key == "CXC_AUDIT_ROOT_FOLDER") cxcAuditRootFolder = val;
+                        if (key == "AUDIT_BASE_PATH") cxcAuditRootFolder = val;
                         
                         if (key == "DB_SERVER") dbServer = val;
                         if (key == "DB_NAME") dbName = val;
