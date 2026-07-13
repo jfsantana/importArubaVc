@@ -17,7 +17,7 @@ namespace HotelImporter
             _connectionString = connString;
         }
 
-        public static void ExecuteImportSp(string spName, string fileName, string xmlContent)
+        public static void ExecuteImportSp(string spName, string fileName, string xmlContent, int commandTimeoutSeconds = 300)
         {
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
@@ -26,6 +26,7 @@ namespace HotelImporter
                 using (SqlCommand cmd = new SqlCommand(spName, conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = commandTimeoutSeconds;
 
                      cmd.Parameters.AddWithValue("@FileName", fileName);
                     cmd.Parameters.AddWithValue("@XmlData", xmlContent);
@@ -49,6 +50,25 @@ namespace HotelImporter
                 using (SqlCommand cmd = new SqlCommand(spName, conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = commandTimeoutSeconds;
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        // ---------------------------------------------------------------------
+        // Ejecuta un comando SQL directo sin parámetros.
+        // Se usa para tareas de mantenimiento puntuales previas a importación.
+        // ---------------------------------------------------------------------
+        public static void ExecuteSqlNonQuery(string sql, int commandTimeoutSeconds = 300)
+        {
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.CommandType = CommandType.Text;
                     cmd.CommandTimeout = commandTimeoutSeconds;
                     cmd.ExecuteNonQuery();
                 }

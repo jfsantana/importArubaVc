@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Mail;
 using System.IO.Compression;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace HotelImporter
 {
@@ -23,6 +24,8 @@ namespace HotelImporter
         static string smtpPass = string.Empty;
         static string emailFrom = string.Empty;
         static string emailTo = string.Empty; // Destinatarios separados por coma
+        static int dbCommandTimeoutSeconds = 300;
+        static int futureOccupancyTimeoutSeconds = 1800;
 
 
         static void Main(string[] args)
@@ -78,8 +81,26 @@ namespace HotelImporter
                     xmlContent = xmlContent.Replace("encoding=\"UTF-8\"", "").Replace("encoding=\"utf-8\"", "");
                     
 
-                    Console.WriteLine($"    Ejecutando SP: {spToUse}...");
-                    DatabaseHelper.ExecuteImportSp(spToUse, fileName, xmlContent);
+                    if (fileName.ToUpper().Contains("RESFUTUREOCCUPANCY"))
+                    {
+                        if (HasFutureOccupancyRows(xmlContent))
+                        {
+                            Console.WriteLine("    Limpiando tabla destino de Future Occupancy...");
+                            DatabaseHelper.ExecuteSqlNonQuery("DELETE FROM [dbo].[Hotel_FutureOccupancy]");
+                            Console.WriteLine("    [OK] Tabla [dbo].[Hotel_FutureOccupancy] limpiada.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("    [INFO] El XML no contiene filas de ocupación futura. No se limpia la tabla.");
+                        }
+                    }
+
+                    int timeoutToUse = fileName.ToUpper().Contains("RESFUTUREOCCUPANCY")
+                        ? futureOccupancyTimeoutSeconds
+                        : dbCommandTimeoutSeconds;
+
+                    Console.WriteLine($"    Ejecutando SP: {spToUse} (timeout {timeoutToUse}s)...");
+                    DatabaseHelper.ExecuteImportSp(spToUse, fileName, xmlContent, timeoutToUse);
 
                     // ------------------------------------------------------------------
                     // POST-PROCESO ESPECÍFICO
@@ -169,6 +190,21 @@ namespace HotelImporter
             if (nameUpper.Contains("DETAIL_AVAIL")) return "sp_Import_Hotel_ForecastOcc";
 
             return string.Empty; // Retorna vacío si no sabe qué es
+        }
+
+        static bool HasFutureOccupancyRows(string xmlContent)
+        {
+            try
+            {
+                XDocument doc = XDocument.Parse(xmlContent);
+                return doc.Descendants("G_CONSIDERED_DATE").Any();
+            }
+            catch
+            {
+                // Si el XML está dañado o no se puede parsear,
+                // no limpiamos para evitar borrar datos válidos por error.
+                return false;
+            }
         }
 
         static void MoveFile(string source, string destFolder)
@@ -389,6 +425,8 @@ namespace HotelImporter
                         if (key == "DB_NAME") dbName = val;
                         if (key == "DB_USER") dbUser = val;
                         if (key == "DB_PASSWORD") dbPassword = val;
+                        if (key == "DB_COMMAND_TIMEOUT_SECONDS" && int.TryParse(val, out int dbTimeout)) dbCommandTimeoutSeconds = dbTimeout;
+                        if (key == "FUTURE_OCCUPANCY_TIMEOUT_SECONDS" && int.TryParse(val, out int futureTimeout)) futureOccupancyTimeoutSeconds = futureTimeout;
                         
                         // Configuración de Correo
                         if (key == "SMTP_HOST") smtpHost = val;
